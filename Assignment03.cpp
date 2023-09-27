@@ -1,142 +1,52 @@
-//*********************************************************************
+//=====================================================================================================
+#include <cstdlib>
+#include <iostream>
 
-// Helper function findPivot
-// Given three indexes in the array, determines which is best for pivot
-// Sets pivotIndex in calling statement to the appropriate index
-// Calculating the number of comparisons is tricky, so it's been done
-// for you :-).  It's 2 or 3 total each time findPivot is called
+using namespace std;
+//=====================================================================================================
+// HEAPSORT .A; n/
+// 1 BUILD-MAX-HEAP .A; n/
+// 2 for i D n downto 2
+// 3 exchange AOE1c with AOEi c
+// 4 A: heap-size D A: heap-size  1
+// 5 MAX-HEAPIFY .A; 1/
 
-void findPivot(int array[], int l, int m, int r, int& pivotIndex) {
-    // NOTE that if we simply used a strategy of choosing one index,
-    // this function can simply set pivotIndex to one of l, m, or r
+// MAX-HEAP-MAXIMUM.A/
+// 1 if A: heap-size < 1
+// 2 error <heap underüow=
+// 3 return AOE1c
 
-    // pivotIndex = l;
+// MAX-HEAP-EXTRACT-MAX .A/
+// 1 max D MAX-HEAP-MAXIMUM.A/
+// 2 AOE1c D AOEA: heap-sizec
+// 3 A: heap-size D A: heap-size  1
+// 4 MAX-HEAPIFY .A; 1/
+// 5 return max
 
-    // However, since we're employing a "best of 3" strategy,
-    // we'll instead make a few comparisons to find the "best" pivot
+int heapsort(int array[], int n)
+{
 
-    comps++;
-    if (array[l] > array[m]) {
-        comps++;
-        if (array[m] > array[r]) {
-            pivotIndex = m;
-        }
-        else if (array[l] > array[r]) {
-            comps++;
-            pivotIndex = r;
-        }
-        else {
-            comps++;
-            pivotIndex = l;
-        }
-    }
-    else {
-        comps++;
-        if (array[l] > array[r]) {
-            pivotIndex = l;
-        }
-        else if (array[m] > array[r]) {
-            comps++;
-            pivotIndex = r;
-        }
-        else {
-            comps++;
-            pivotIndex = m;
-        }
-    }
 }
 
-// Helper function quickSortPartition
-// Chooses a pivot value, performs partition, returns index where
-// pivot value is when done
+//=====================================================================================================
+// QUICKSORT.A; p; r
+// 1 if p < r
+// 2 // Partition the subarray around the pivot, which ends up in AOEqc.
+// 3 q D PARTITION.A; p; r/
+// 4 QUICKSORT.A; p; q  1/ // recursively sort the low side
+// 5 QUICKSORT.A; q C 1; r/ // recursively sort the high side
 
-int quickSortPartition(int array[], int start, int end) {
+// PARTITION.A; p; r/
+// 1 x D AOErc // the pivot
+// 2 i D p  1 // highest index into the low side
+// 3 for j D p to r  1 // process each element other than the pivot
+// 4 if AOEj c හ x // does this element belong on the low side?
+// 5 i D i C 1 // index of a new slot in the low side
+// 6 exchange AOEi c with AOEj c // put this element there
+// 7 exchange AOEi C 1c with AOErc // pivot goes just to the right of the low side
+// 8 return i C 1 // new index of the pivot
 
-    // Pre-condition: there are at least three elements to partition
-
-    // We'll use a "best of 3" strategy to select a pivot value
-    // using a helper function to determine which value is best
-    int mid = (start + end) / 2;
-    int pivotIndex;
-
-    // Select pivot - findPivot will be set to the best index
-    // and the comps will be conted in tne findPivot function
-    findPivot(array, start, mid, end, pivotIndex);
-
-    // Swap pivot value to be the first item temporarily
-    // (it'll be moved back after other values are partitioned)
-    swap(array[pivotIndex], array[start]);
-
-    // Now that the pivot value is at array[start], let's partition!
-    int i = start;
-    for (int j=start+1; j<=end; j++) {
-        if (array[j] < array[start]) {
-            i++;
-            // swap smaller value to left part
-            swap(array[i], array[j]);
-        }
-    }
-
-    // Now swap pivot value back into correct position
-    swap(array[start], array[i]);
-    return i;
-}
-
-//*********************************************************************
-
-// Helper function quickSortRecursive
-// Handle base cases, use partition function, make recursive calls
-// For each call, start and end define which part of the array to sort
-
-void quickSortRecursive(int array[], int start, int end) {
-
-    // Base cases - array of size 0 or 1
-    if (end - start < 1) {
-        calls++;
-        return;
-    }
-
-    // Base case - array of size 2 - swap items if needed
-    if (end - start == 1) {
-        if (array[end] < array[start]) {
-            swap(array[start], array[end]);
-        }
-        calls++;
-        return;
-    }
-
-    // Call partition to perform partitioning and return index
-    // NOTE: *Not* a recursive call, so don't count it as one!
-
-    int partitionIndex = quickSortPartition(array, start, end);
-
-    // At this point, we have, in order, from left to right:
-    //    * All values <= pivot value
-    //    * The pivot value itself (at partitionIndex)
-    //    * All values >= pivot value
-
-    // Now we recursively apply this sort to those 2 partitioned parts
-    // (Not including pivot value, as it doesn't need to be moved now!)
-
-    quickSortRecursive(array, start, partitionIndex-1);
-    quickSortRecursive(array, partitionIndex+1, end);
-
-    // After these calls recurse all the way to the base cases, we're sorted!
-}
-
-//---------------------------------------------------------------
-// quickSort(int [], int)
-// Expects an integer array and its size
-// Returns nothing
-// Side Effect is array elements are arranged in sorted order
-// Side Effect is output to screen number of comparisons and swaps
-//---------------------------------------------------------------
-
-void quickSort(int array[], int size) {
-    comps = moves = calls = 0;
-
-    quickSortRecursive(array, 0, size-1);
-
-    sortReport(array, size, "QUICK");
+int quicksort(int array[], int n)
+{
 
 }
