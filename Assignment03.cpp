@@ -23,6 +23,26 @@ using namespace std;
 // 4 MAX-HEAPIFY .A; 1/
 // 5 return max
 
+// MAX-HEAP-I NCREASE-KEY .A; x; k/
+// 1 if k < x: key
+// 2 error <new key is smaller than current key=
+// 3 x: key D k
+// 4 ûnd the index i in array A where object x occurs
+// 5 while i > 1 and AOEPARENT.i /c: key < AOEi c: key
+// 6 exchange AOEi c with AOEPARENT.i /c, updating the information that maps
+// priority queue objects to array indices
+// 7 i D PARENT.i /
+
+// MAX-HEAP-I NSERT .A; x; n/
+// 1 if A: heap-size == n
+// 2 error <heap overüow=
+// 3 A: heap-size D A: heap-size C 1
+// 4 k D x: key
+// 5 x: key D 1
+// 6 AOEA: heap-sizec D x
+// 7 map x to index heap-size in the array
+// 8 MAX-HEAP-I NCREASE-KEY .A; x; k/
+
 int heapsort(int array[], int n)
 {
 
