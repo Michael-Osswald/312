@@ -122,11 +122,9 @@ int main()
     }
     cout << endl;
 
-   
     int N = array1.size();
- 
-    // Function call
     heapSort(array1, N);
+    cout << (heapSort(array1, N)) << endl;
 
     cout << "Array 1 Values" << endl
     for(int i = 0; i < 100; i++)
